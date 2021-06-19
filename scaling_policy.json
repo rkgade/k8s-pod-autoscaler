@@ -1,0 +1,22 @@
+{
+	"nginx-memory-policy": {
+		"namespace": "microservices",
+		"deployment": "nginx-deployment",
+		"metrics": {
+			"type": "memory",
+			"target": "1Mi",
+			"style": "scaleup",
+			"count": "1"
+		}
+	},
+	"nginx-cpu-policy": {
+		"namespace": "microservices",
+		"deployment": "nginx-deployment",
+		"metrics": {
+			"type": "memory",
+			"target": "1Mi",
+			"style": "scaleup",
+			"count": "1"
+		}
+	}
+}

@@ -14,8 +14,9 @@ Thought process is :
 7. Read Policy that specifies what service to monitor and till what metrics.
 """
 from kubernetes import client, config
-from yaml import nodes
-
+from os import path
+import yaml
+import json
 # Functions
 
 
@@ -116,3 +117,27 @@ for pod in resource["items"]:
 # print(local_config)
 # local_config = config.new_client_from_config # This returns an API Object , can talk to multiple clusters at once.
 # local_config = config.load_kube_config_from_dict(local_config_dict) # This takes kubeonfig file
+
+
+# Read Policies
+def read_policies():
+    with open(path.join(path.dirname(__file__), "scaling_policy.json")) as f:
+        policies = json.load(f)
+        f.close()
+    return policies
+
+    # print(policies)
+
+
+def main():
+    print("Main Function")
+    all_policies = read_policies()
+    for policy, description in all_policies.items():
+        print(f"Policy is: {policy}")
+        # print(f"Description is: {description}")
+        print(f'Namespace : {description["namespace"]}')
+        print(f'Deployment is: {description["deployment"]}')
+
+
+if __name__ == '__main__':
+    main()
