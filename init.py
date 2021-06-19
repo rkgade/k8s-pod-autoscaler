@@ -80,11 +80,11 @@ selected_namespace = "microservices"
 # List Deployments Per Namesapce
 deployments_per_namespace = k8s_client_apps.list_namespaced_deployment(
     namespace=selected_namespace)
-for deployment in deployments_per_namespace.items:
-    print(type(deployment))
-    print(deployment.metadata.name)
-    print("SCALING UP ")
-    scale_deployment_by_count(selected_namespace, deployment, 1)
+# for deployment in deployments_per_namespace.items:
+#     print(type(deployment))
+#     print(deployment.metadata.name)
+#     print("SCALING UP ")
+#     scale_deployment_by_count(selected_namespace, deployment, 1)
 
 
 # List Pods Per Namespace
@@ -99,8 +99,12 @@ pods_per_namespce = k8s_client_api.list_namespaced_pod(
 print("--pod metrics--")
 resource = k8s_client_custom.list_namespaced_custom_object(
     group="metrics.k8s.io", version="v1beta1", namespace=selected_namespace, plural="pods")
+# print(resource["items"])
+print(f'Number of Pods :{len(resource["items"])}')
 for pod in resource["items"]:
+    # Available, metadata, tiemstamp , window , containers.
     print(pod['containers'], "\n")
+
 
 # Scale up one pod by scaling deployment
 
